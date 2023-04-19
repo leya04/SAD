@@ -1,0 +1,225 @@
+<img src="assets/logo.png" alt="" id="logo" width="180" height="150" />
+<!-- Navbar -->
+<div class="main-container">
+  <div class="container">
+    <div id="main">
+      <div class="form-floating">
+        <select
+          class="form-select"
+          id="inputPayment"
+          #inputPayment
+          (change)="changePayment(inputPayment.value)"
+          formControlName="inputPayment"
+          aria-label="Floating label select example"
+        >
+          <option selected disabled>No Selected</option>
+          <option value="Cash">Cash</option>
+          <option value="Charge">Charge</option>
+        </select>
+        <label for="inputPayment">Select payment method</label>
+      </div>
+      <div *ngIf="inputPayment.value == 'Cash'">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Cash Received</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+      </div>
+      <div *ngIf="inputPayment.value == 'Charge'">
+        <h1 *ngIf="name != null">
+          {{ name }}
+        </h1>
+      </div>
+
+      <div id="brand">
+        <div class="block">
+          <label>Brand: &nbsp;</label>
+          <input type="text" placeholder="Search brand name" name="search" />
+          <button type="submit">Search</button>
+        </div>
+      </div>
+
+      <div id="table">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-borderless table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="button">
+        <button type="submit" class="btn btn-primary">
+          <!-- <button type="submit" (click)="openPayment()" class="btn btn-primary"></button> -->
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end of <div class="left_div"> -->
+</div>
+
+<!-- Modal card -->
+<div
+  class="modal fade"
+  id="createCategory"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-success">
+          <i class="fas fa-user-plus" style="font-size: 25px"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Contact #</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of costoms" (click)="setName(p.name)">
+              <td>{{ p.name }}</td>
+              <td>{{ p.contactNum }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+
+<!--modal payment cash-->
+<div class="modal" tabindex="-1" id="showpayment">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="block" id="date">
+          <label>Date:</label>
+          <input type="date" readonly />
+        </div>
+        <div class="block">
+          <label>Total:</label>
+          <input class="text-line" type="text" placeholder="Text" readonly />
+        </div>
+        <div class="block" style="margin-top: 2rem">
+          <label>Payment:</label>
+          <input class="text-line" type="text" placeholder="Text" readonly />
+        </div>
+        <div class="block" style="margin-top: 2rem">
+          <label>Change:</label>
+          <input class="text-line" type="text" placeholder="Text" readonly />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          routerLink="/cash"
+          class="btn btn-dark"
+          data-bs-dismiss="modal"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--charge modal-->
+<div>
+  <div class="modal" tabindex="-1" id="showpayment">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Change Modal</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="block" id="date">
+            <label>Date:</label>
+            <input type="date" readonly />
+          </div>
+          <div class="block">
+            <label>Total:</label>
+            <input class="text-line" type="text" placeholder="Text" readonly />
+          </div>
+          <div class="block" style="margin-top: 2rem">
+            <label>Payment:</label>
+            <input class="text-line" type="text" placeholder="Text" readonly />
+          </div>
+          <div class="block" style="margin-top: 2rem">
+            <label>Change:</label>
+            <input class="text-line" type="text" placeholder="Text" readonly />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            routerLink="/cash"
+            class="btn btn-dark"
+            data-bs-dismiss="modal"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
